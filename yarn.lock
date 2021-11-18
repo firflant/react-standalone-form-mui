@@ -2813,10 +2813,10 @@ react-loading@^2.0.3:
   resolved "https://registry.yarnpkg.com/react-loading/-/react-loading-2.0.3.tgz#e8138fb0c3e4674e481b320802ac7048ae14ffb9"
   integrity sha512-Vdqy79zq+bpeWJqC+xjltUjuGApyoItPgL0vgVfcJHhqwU7bAMKzysfGW/ADu6i0z0JiOCRJjo+IkFNkRNbA3A==
 
-react-standalone-form@^1.4.5:
-  version "1.4.5"
-  resolved "https://registry.yarnpkg.com/react-standalone-form/-/react-standalone-form-1.4.5.tgz#39276726db247f4b4a89469f7b565f0c43585f57"
-  integrity sha512-TQoIPEnxX3pp6HlVfCOET83tJKtYr4zHQzfFVadRS+rGEEBvBJiQQOJPybGnEwHIRceobdGP9HtMoCOt6FOyoQ==
+react-standalone-form@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/react-standalone-form/-/react-standalone-form-1.5.2.tgz#091117689993c5b8026988fe94dc8564049bf6fd"
+  integrity sha512-0Yd/aYEJaZ+3HR7c2M34DqA5+I26R/0bUfyaq2A6B2j4P7E8sYS5Du9HhVpRG0L1AgY+LG7ZvLEChhdvFJgrAg==
   dependencies:
     polished "^3.0.3"
     react-jss "^10.0.3"
