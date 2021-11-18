@@ -14,87 +14,92 @@ const MultiImageUpload = ({
   value,
   required,
   setValue,
-  classes,
   spacing,
   columns,
-}) =>
-  <Grid container spacing={spacing}>
-    {value &&
-      value.map((item, index) =>
-        <Grid item sm={12 / columns} key={index}>
-          <Grid
-            container
-            alignItems='center'
-            justify='center'
-            className={classes.wrapper}
-          >
-            <img
-              src={item.data || item}
-              className={classes.image}
-              alt={`Uploaded file ${index}`}
-            />
-            <IconButton
-              className={classes.delete}
-              onClick={() => setValue(
-                name,
-                value.filter((subItem, subIndex) => subIndex !== index),
-                required
-              )}
+  uploadLabel,
+}) => {
+  const classes = useStyles()
+  return (
+    <Grid container spacing={spacing}>
+      {value &&
+        value.map((item, index) =>
+          <Grid item sm={12 / columns} key={index}>
+            <Grid
+              container
+              alignItems='center'
+              justify='center'
+              className={classes.wrapper}
             >
-              <DeleteIcon fontSize='small' />
-            </IconButton>
+              <img
+                src={item.data || item}
+                className={classes.image}
+                alt={`Uploaded file ${index}`}
+              />
+              <IconButton
+                className={classes.delete}
+                onClick={() => setValue(
+                  name,
+                  value.filter((subItem, subIndex) => subIndex !== index),
+                  required
+                )}
+              >
+                <DeleteIcon fontSize='small' />
+              </IconButton>
+            </Grid>
           </Grid>
-        </Grid>
-      )
-    }
-    <Grid item sm={12 / columns}>
-      <input
-        accept='image/*'
-        className={classes.input}
-        id={name}
-        multiple
-        type='file'
-        onChange={e => {
-          let oldValue = value || []
-          Object.values(e.target.files).forEach(value => {
-            const fileReader = new FileReader()
-            const { name: fileName, type: fileType } = value
-            const dataFile = value
-            fileReader.readAsDataURL(value)
-            fileReader.onload = () => {
-              const data = fileReader.result
-              setValue(
-                name,
-                [...oldValue, {
+        )
+      }
+      <Grid item sm={12 / columns}>
+        <input
+          accept='image/*'
+          className={classes.input}
+          id={name}
+          multiple
+          type='file'
+          onChange={e => {
+            let oldValue = value || []
+            Object.values(e.target.files).forEach(async value => {
+              const fileReader = new FileReader()
+              const { name: fileName, type: fileType } = value
+              const dataFile = value
+              await fileReader.readAsDataURL(value)
+              fileReader.onload = () => {
+                const data = fileReader.result
+                setValue(
+                  name,
+                  [...oldValue, {
+                    fileName,
+                    type: fileType.split('/')[0],
+                    data,
+                    dataFile,
+                  }],
+                  required
+                )
+                oldValue = [...oldValue, {
                   fileName,
                   type: fileType.split('/')[0],
                   data,
                   dataFile,
-                }],
-                required
-              )
-              oldValue = [...oldValue, {
-                fileName,
-                type: fileType.split('/')[0],
-                data,
-                dataFile,
-              }]
-            }
-          })
-        }}
-      />
-      <label htmlFor={name} className={classNames(classes.wrapper, classes.label)}>
-        <CloudUploadIcon />
-        <Typography variant='caption' color='inherit'>Add more</Typography>
-      </label>
+                }]
+              }
+            })
+          }}
+        />
+        <label htmlFor={name} className={classNames(classes.wrapper, classes.label)}>
+          <CloudUploadIcon />
+          <Typography variant='caption' color='inherit'>{uploadLabel}</Typography>
+        </label>
+      </Grid>
     </Grid>
-  </Grid>
+  )
+}
 
 MultiImageUpload.defaultProps = {
   spacing: 2,
   columns: 2,
   smHeight: '20vw',
   mdHeight: '12vw',
+  uploadLabel: 'Upload',
 }
 
 export default withStyles(theme => ({
