@@ -8,7 +8,7 @@ import { FormButton as CoreFormButton } from 'react-standalone-form'
  * A button component to handle form actions, like submit or reset.
  */
 const FormButton = ({
-  callback,
+  onClick,
   component,
   reset,
   loading,
@@ -18,7 +18,7 @@ const FormButton = ({
 }) =>
   <CoreFormButton
     component={component}
-    callback={fields => callback(fields)}
+    onClick={e => onClick(e)}
     loading={loading}
     loadingComponent={loadingComponent}
     reset={reset}
@@ -26,7 +26,7 @@ const FormButton = ({
   >{children}</CoreFormButton>
 
 FormButton.propTypes = {
-  callback: PropTypes.func,
+  onClick: PropTypes.func,
   loading: PropTypes.bool,
   reset: PropTypes.bool,
   children: PropTypes.node.isRequired,
