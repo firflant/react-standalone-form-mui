@@ -1,6 +1,6 @@
 {
   "name": "react-standalone-form-mui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The Material UI suite for react-standalone-form library.",
   "main": "lib/index.js",
   "scripts": {
